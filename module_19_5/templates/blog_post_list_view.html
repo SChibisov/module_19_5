@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List 2</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'style.css'%}">
+</head>
+<body>
+    <div class="post-container">
+        {% for post in posts %}
+            <h2>{{ post.title }}</h2>
+            <p class="post_p">{{ post.body|truncatewords:100 }}</p>
+        {% endfor %}
+    </div>
+    <div id="custom-pagination">
+        <form action="" method="get">
+            <label for="per_page">Элементы на странице:</label>
+            <select id="per_page" name="per_page">
+                <option value="">--</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+            <button type="submit" class="paginator_bt">Применить</button>
+        </form>
+        <ul class="pagination">
+            {% if posts.has_previous %}
+                <li><a href="?page={{ posts.previous_page_number }}">«</a></li>
+            {% else %}
+                <li class="disabled"><span>«</span></li>
+            {% endif %}
+
+            {% for i in posts.paginator.page_range %}
+                {% if posts.number == i %}
+                    <li class="active"><span>{{ i }}<span class="sr-only"> (Текущая)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if posts.has_next %}
+                <li><a href="?page={{ posts.next_page_number }}">»</a></li>
+            {% else %}
+                <li class="disabled"><span>»</span></li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+<form action="http://127.0.0.1:8000/" target="_self">
+    <button class="btn">В пост лист 1</button>
+</form>
+</html>

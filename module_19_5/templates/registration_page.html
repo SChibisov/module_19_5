@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserRegister</title>
+    <style>
+        .error-message {
+            font-weight: 700;
+            color: red;
+        }
+        .alert{color:red}
+        .form-group{
+            margin: 10px О;
+        }
+        .form-group input{
+            width: 250px;
+            height: 25px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" >
+        {% csrf_token %}
+        <span class="error-message">{{info.error}}</span>
+        <div class="form-group">
+            {% for field in form%}
+                <div>{{field.label_tag}}</div>
+                <div>{{field}}</div>
+                {% if field.errors%}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <input type="submit" value="Зарегистрироваться">
+    </form>
+</body>
+</html>

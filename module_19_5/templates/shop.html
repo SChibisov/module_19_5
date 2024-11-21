@@ -1,0 +1,25 @@
+{% extends "menu.html" %}
+
+{% block pagename %}
+    <h1>Магазин цветов</h1>
+{% endblock%}
+
+{% block menu %}
+    {{ block.super }}
+{% endblock%}
+
+{% block content %}
+    <style>
+        ul {list-style-type: "\2705";}
+        </style>
+    {% for flower in flowers %}
+        <ul>
+            <li>{{ flower }} <button>Купить</button></li>
+        </ul>
+    {% empty %}
+        <ul>
+            <li>Цветы отсутствуют</li>
+        </ul>
+    {% endfor %}
+    {{ block.super }}
+{% endblock%}

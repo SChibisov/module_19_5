@@ -1,0 +1,14 @@
+{% extends "menu.html" %}
+
+{% block pagename %}
+    <h1>Корзина покупок</h1>
+{% endblock%}
+
+{% block menu %}
+    {{ block.super }}
+{% endblock%}
+
+{% block content %}
+    <h2><button>Очистить корзину</button></h2>
+    {{ block.super }}
+{% endblock%}
